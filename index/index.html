@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой сайт на GitHub</title>
+    <style>
+        /* Явно устанавливаем белый фон */
+        body {
+            background: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            color: #333;
+        }
+        .download-area {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            max-width: 400px;
+        }
+        .download-btn {
+            display: inline-block;
+            margin: 5px 0;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .download-btn:hover {
+            background: #0056b3;
+        }
+        .file-list {
+            list-style: none;
+            padding: 0;
+        }
+        .file-list li {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Привет, мир!</h1>
+    <p>Это мой первый сайт на GitHub Pages.</p>
+
+    <!-- Блок со скачиванием файлов -->
+    <div class="download-area">
+        <h2>Скачать файлы</h2>
+
+        <p><strong>1. Статический файл</strong> (должен лежать в репозитории):</p>
+        <ul class="file-list">
+            <li>
+                <a href="example.txt" download class="download-btn">
+                    📄 Скачать порнушку
+                </a>
+             
+            </li>
+            <!-- Можно добавить другие файлы, например, PDF -->
+            <!-- <li><a href="document.pdf" download class="download-btn">📄 Скачать PDF</a></li> -->
+        </ul>
+
+    <script>
+        // Функция для скачивания текстового файла с произвольным содержимым
+        function downloadFile(content, filename, mimeType = 'text/plain') {
+            const blob = new Blob([content], { type: mimeType });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+        }
+
+        // Обработчик для кнопки .txt
+        document.getElementById('downloadTxtBtn').addEventListener('click', function() {
+            const now = new Date().toLocaleString();
+            const content = `Этот файл создан автоматически.\nДата и время: ${now}\nАвтор: пользователь сайта.`;
+            downloadFile(content, 'сгенерированный_файл.txt', 'text/plain');
+        });
+
+        // Обработчик для кнопки .json (пример с данными)
+        document.getElementById('downloadJsonBtn').addEventListener('click', function() {
+            const data = {
+                имя: "Гость",
+                дата: new Date().toISOString(),
+                сообщение: "Привет с GitHub Pages!"
+            };
+            const jsonContent = JSON.stringify(data, null, 2);
+            downloadFile(jsonContent, 'данные.json', 'application/json');
+        });
+    </script>
+
+</body>
+</html>

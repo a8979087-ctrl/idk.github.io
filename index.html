@@ -4,58 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Скачивание файлов</title>
-    <!-- Минимум стилей: только белый фон -->
     <style>
-        body {
-            background: white;
-            font-family: sans-serif;
-            padding: 20px;
+        body { font-family: sans-serif; text-align: center; padding: 50px; }
+        .download-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            margin-top: 20px;
         }
+        .download-btn:hover { background-color: #0056b3; }
     </style>
 </head>
 <body>
-
-    <h1>Мои файлы</h1>
-    <p>Кликните по ссылке, чтобы скачать файл.</p>
-
-    <!-- ===== Статические файлы ===== -->
-    <h2>Статические файлы</h2>
-    <ul>
-        <li><a href="example.txt" download>Скачать example.txt</a> (создайте этот файл в корне)</li>
-        <li><a href="photo.jpg" download>Скачать photo.jpg</a> (положите свою картинку)</li>
-        <!-- Добавьте свои ссылки по образцу -->
-    </ul>
-
-    <!-- ===== Динамическая генерация (через JavaScript) ===== -->
-    <h2>Сгенерировать на лету</h2>
-    <ul>
-        <li><a href="javascript:void(0)" id="genTxt">Скачать .txt с текущей датой</a></li>
-        <li><a href="javascript:void(0)" id="genJson">Скачать .json с примером данных</a></li>
-    </ul>
-
-    <script>
-        // Простая функция скачивания
-        function download(content, filename, mime = 'text/plain') {
-            const blob = new Blob([content], { type: mime });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(a.href);
-        }
-
-        document.getElementById('genTxt').onclick = function() {
-            const now = new Date().toLocaleString();
-            download('Файл создан: ' + now, 'дата.txt', 'text/plain');
-        };
-
-        document.getElementById('genJson').onclick = function() {
-            const data = { имя: 'Гость', время: new Date().toISOString() };
-            download(JSON.stringify(data, null, 2), 'данные.json', 'application/json');
-        };
-    </script>
-
+    <h1>Доступные для скачивания файлы</h1>
+    <p>Нажмите на кнопку ниже, чтобы загрузить архив на свой компьютер.</p>
+    
+    <!-- Укажите путь к вашему файлу в атрибуте href -->
+    <a href="files/my-document.zip" class="download-btn" download>Скачать файл (ZIP)</a>
 </body>
 </html>
